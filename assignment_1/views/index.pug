@@ -1,0 +1,49 @@
+extends layout
+
+block append content
+    .home-page
+        header
+            img.image(src='/images/logo.png' , width="150" )
+            h1
+                | Restaurant Launcher
+            p
+                | Web Mashup developed for CAB432 Assignment 1
+            p
+                | Created by: Sandali Deenalattha (N9878831)
+            a(href = '/about') About
+            p
+                #google_translate_element
+                script(type='text/javascript', src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit')
+block append content
+    .container
+        h1.place-title Choose your favorite Restaurant
+            form(method='post', id="form_id", onsubmit="validation(this)", action="/city")
+                .row
+                    .col-25
+                        label(for='country') Country
+                    .col-75
+                        select(name='country', id='country')
+                            option(value='all') All
+                            option(value='au', selected='true') Australia
+                            option(value='br') Brazil
+                            option(value='ind') India
+                            option(value='chi') Chile
+                            option(value='sri') Sri Lanka
+                            option(value='pt') Portugal
+                            option(value='nz') New Zealand
+                            option(value='qtr') Qatar
+                            option(value='it') Italy
+                            option(value='uk') United Kingdom
+                            option(value='us') America
+                            option(value='uae') UAE
+                            option(value='ca') Canada
+                .row
+                    .col-25
+                        label(for='city') City
+                    .col-75
+                        input(type='text', id='city', name='city' placeholder='Enter a City', onchange="submitItem()")
+
+                        #map(style="display: none;")
+
+            // Replace the value of the key parameter with your own API key.
+        script(src='https://maps.googleapis.com/maps/api/js?key=$APIKEY&libraries=places&callback=initMap', async='', defer='')

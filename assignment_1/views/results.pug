@@ -1,0 +1,34 @@
+extends layout
+
+block append content
+    .home-page
+        header
+            img.image(src='/images/logo.png' , width="150" )
+            h1
+                | Restaurant Launcher
+            p
+                #google_translate_element
+                script(type='text/javascript', src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit')
+block append content
+    - let n = det.length;
+    - for(let i=0; i < n; i++){
+        .column
+            .card
+                img#image(src=det[i].RestaurantThumb, alt='Picture Not Available', style="width:100%")
+                .container.cards
+                    h4
+                        b=det[i].RestaurantName
+                    p='Address: ' + det[i].RestaurantAdd
+                    p='Cuisine: ' + det[i].RestaurantCui
+                    p='Rating: ' + det[i].RestaurantRate
+                    p='Price For Two: ' + det[i].RestaurantPrice
+                        //Hidden input fields
+                        form(action="/location", method='post')
+                            input(type="hidden", name="citySelected", id="citySelected", readonly="readonly" value=det[i].City)
+                            input(type="submit", onclick='form.submit();', value="Direction" )
+                    p
+
+
+    - }
+
+    script(src='https://maps.googleapis.com/maps/api/js?key=$APIKEY&libraries=places&callback=initMap', async='', defer='')
